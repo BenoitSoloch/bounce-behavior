@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Navbar from "./components/Navbar";
+import GlobalStyle from "./styles/global";
+import Default from "./pages/Default";
+import Footer from "./components/Footer";
+import Visualizer from "./pages/Visualizer";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import create from "zustand";
+
+export const useFileStore = create((set) => ({
+    balls: [],
+    box: null,
+    setBalls: (newBalls) => set(() => ({ balls: newBalls })),
+    setBox: (newBox) => set(() => ({ box: newBox })),
+    resetBalls: () => set(() => ({ balls: [] })),
+    resetBox: () => set(() => ({ box: {} })),
+}))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+          <GlobalStyle/>
+          <Navbar/>
+
+          <Routes>
+              <Route path='/' element={<Default/>} />
+              <Route path='/visualizer' element={<Visualizer/>} />
+              <Route path='/*' element={<Default/>} />
+          </Routes>
+
+          <Footer/>
+          <ToastContainer/>
+      </Router>
   );
 }
 

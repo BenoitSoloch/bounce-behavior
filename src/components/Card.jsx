@@ -36,6 +36,9 @@ export default function Card() {
             box: demoFile.box,
             clumpsNb: demoFile.balls.length
         });
+
+        console.log('before Balls:', demoFile.balls);
+        console.log('before Box:', demoFile.box);
     }
 
     const onCloseClicked = () => {
@@ -47,8 +50,10 @@ export default function Card() {
         console.log('before Balls:', file.balls);
         console.log('before Box:', file.box);
 
-        setBalls(file.balls);
-        setBox(file.box);
+        // setBalls(file.balls);
+        // setBox(file.box);
+        setBalls(demoFile.balls);
+        setBox(demoFile.box);
 
         navigate('visualizer');
     }
